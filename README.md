@@ -1,2 +1,2 @@
-# Solving the UNO Card Game with Reinforcement Learning
+# Tackling the UNO Card Game with Reinforcement Learning
 This repository is still work in progress.
