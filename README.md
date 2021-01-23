@@ -1,5 +1,4 @@
 # Tackling the UNO Card Game with Reinforcement Learning
-***
 In this project I tried to analytically derive an optimal strategy, for the classic UNO card game. To do so, I split up the workflow into 3 parts:
 * Creating a game engine of the UNO card game in Python from scratch
 * Obtaining game statistics from simulating a series of 100,000 games
@@ -18,5 +17,6 @@ The questions that are being answered
 **Packages:** pandas, numpy, datetime, selenium, webdriver-manager, matplotlib
 
 <p align="center">
-  <img src="https://github.com/bernhard-pfann/uno-card-game-rl/blob/main/assets/img/widgets.png" width="600">
+  <img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/widgets.PNG" width="600">
 </p>
+
