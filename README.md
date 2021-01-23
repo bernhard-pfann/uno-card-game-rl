@@ -1,5 +1,5 @@
 # Tackling the UNO Card Game with Reinforcement Learning
-In this project I tried to analytically derive an optimal strategy, for the classic UNO card game. To do so, I split up the workflow into 3 parts:
+In this project I tried to analytically derive an optimal strategy, for the classic UNO card game. To do so, I structured my work as follows:
 1. Creating a game engine of the UNO card game in Python from scratch
 2. Obtaining game statistics from simulating a series of 100,000 games
 3. Implementing basic Reinforcement Learning techniques (Q-Learning & Monte Carlo) in order to discover an optimal game strategy
@@ -13,8 +13,8 @@ By running multiple simulations of the game, the following questions are being t
 * How big is the advantage of the player making the first turn?
 * What are the most likely situations in the course of a game?
 
-<p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/turns.PNG", width = "600"></p>
-<p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/starting-advantage.PNG", width = "600"></p>
+<p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/turns.png", width = "600"></p>
+<p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/starting-advantage.png", width = "600"></p>
 
 Via main.ipynb, simulations can be executed. The questions that are being answered 
 <p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/widgets.PNG"></p>
