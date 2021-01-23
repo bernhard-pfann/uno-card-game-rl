@@ -9,6 +9,9 @@ In order to train a Reinforcement Learning (RL) agent how to play intelligently,
 
 ### Game Statistics from Simulations
 Via main.ipynb, simulations can be executed. Thereby the number of simulations and other settings can be selected via dropdown and slider widgets.
+<p align="center">
+  <img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/widgets.PNG" width="200">
+</p>
 
 The questions that are being answered 
 
@@ -16,7 +19,5 @@ The questions that are being answered
 **Python Version:** 3.7  
 **Packages:** pandas, numpy, datetime, selenium, webdriver-manager, matplotlib
 
-<p align="center">
-  <img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/widgets.PNG" width="600">
-</p>
+
 
