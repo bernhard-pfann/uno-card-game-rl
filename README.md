@@ -13,7 +13,7 @@ By running multiple simulations of the game, the following questions are being t
 * How big is the advantage of the player making the first turn?
 * What are the most likely situations in the course of a game?
 
-<p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/turns.png", width = "600"></p><br><br>
+<p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/turns.png", width = "600"></p>
 <p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/starting-advantage.png", width = "600"></p>
 
 ### 3. Application of Reinforcement Learning
@@ -22,7 +22,7 @@ In agent.py, I defined the algorithm for a Q-Learning and Monte-Carlo agent, bot
 
 Finally the results after training the RL-model are being analyzed in terms to cumulative win-rate and obtained Q-values.
 
-<p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/win-rate.png", width = "600"></p><br><br>
+<p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/win-rate.png", width = "600"></p>
 <p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/q-curve.png", width = "600"></p>
 
 **Python Version:** 3.7  
