@@ -7,24 +7,26 @@ In this project I tried to analytically derive an optimal strategy, for the clas
 ### 1. UNO Card Engine
 In order to train a Reinforcement Learning (RL) agent how to play intelligently, a fully-fledged game environment needs to be in place, capturing all the mechanics and rules of the game. In environment.py class objects for <i>card, deck, player, turn</i> and <i>game</i> are defined. In main.ipynb, the classes are imported as module, to run simulations.
 
-### 2. Game Statistics from Simulations
+### 2. Statistics from Simulations
 By running multiple simulations of the game, the following questions are being tackled:
 * How many turns do games last?
 * How big is the advantage of the player making the first turn?
 * What are the most likely situations in the course of a game?
 
-<p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/turns.png", width = "600"></p>
-<p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/starting-advantage.png", width = "600"></p>
-
-Via main.ipynb, simulations can be executed. The questions that are being answered 
-<p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/widgets.PNG"></p>
+<p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/turns.png", width = "600"></p><br><br>
+<p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/starting-advantage.png", width = "600"></p>
 
 ### 3. Application of Reinforcement Learning
-Thereby the number of simulations and other settings can be selected via dropdown and slider widgets.
+In agent.py, I defined the algorithm for a Q-Learning and Monte-Carlo agent, both working with a discrete state-action matrix. Via widgets in main.ipynb, the preferred algorithm can be selected together with its main tuning parameters. 
+<p align="left"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/widgets.PNG"></p>
 
+Finally the results after training the RL-model are being analyzed in terms to cumulative win-rate and obtained Q-values.
+
+<p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/win-rate.png", width = "600"></p><br><br>
+<p align="center"><img src="https://github.com/bernhard-pfann/uno-card-game_rl/blob/main/assets/img/q-curve.png", width = "600"></p>
 
 **Python Version:** 3.7  
-**Packages:** pandas, numpy, datetime, selenium, webdriver-manager, matplotlib
+**Packages:** pandas, numpy, random, itertools, time, tqdm, sys, os, matplotlib, seaborn, ipywidgets
 
 
 
