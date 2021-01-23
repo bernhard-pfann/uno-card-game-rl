@@ -5,7 +5,7 @@ In this project I tried to analytically derive an optimal strategy, for the clas
 3. Implementing basic Reinforcement Learning techniques (Q-Learning & Monte Carlo) in order to discover an optimal game strategy
 
 ### 1. UNO Card Engine
-In order to train a Reinforcement Learning (RL) agent how to play intelligently, a fully-fledged game environment needs to be in place, capturing all the mechanics and rules of the game. In environment.py class objects for <i>card, deck, player, turn</i> and <i>game</i> are defined. In main.ipynb, the classes are imported as module, to run simulations.
+In order to train a Reinforcement Learning (RL) agent how to play intelligently, a fully-fledged game environment needs to be in place, capturing all the mechanics and rules of the game. In environment.py class objects for <i>'''card, deck, player, turn'''</i> and <i>game</i> are defined. In main.ipynb, the classes are imported as module, to run simulations.
 
 ### 2. Statistics from Simulations
 By running multiple simulations of the game, the following questions are being tackled:
