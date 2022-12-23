@@ -1,20 +1,12 @@
-# Libraries
-# -------------------------------------------------------------------------
-
-# Custom libraries
-import agents as ag
-import state_action_reward as sar
-
-# Public libraries
 import numpy as np
 import random
 import time
-from tqdm.notebook import tqdm
-import sys, os
+import sys 
+import os
 
+import src.agents as ag
+import src.state_action_reward as sar
 
-# 1. Print Functions
-# -------------------------------------------------------------------------
 
 def block_print():
     sys.__stdout__ = sys.stdout
@@ -33,9 +25,6 @@ def underline(string):
     chr_end = "\033[0m"
     print(chr_start + string + chr_end)
 
-
-# 2. Card
-# -------------------------------------------------------------------------
 
 class Card(object):
     """
@@ -60,9 +49,6 @@ class Card(object):
     def print_card(self):
         return str(self.color) + " " + str(self.value)
 
-
-# 3. Deck
-# -------------------------------------------------------------------------
 
 class Deck(object):
     """
@@ -114,9 +100,6 @@ class Deck(object):
         for c in self.cards_disc:
             c.show_card()
 
-
-# 4. Player
-# -------------------------------------------------------------------------
 
 class Player(object):
     """
@@ -357,9 +340,6 @@ class Player(object):
             card.show_card()
 
 
-# 5. Turn
-# -------------------------------------------------------------------------
-
 class Turn(object):
     """
     Captures the process of a turn, that consists of:
@@ -491,9 +471,6 @@ class Turn(object):
             for i in range (self.count*penalty): player_pas.draw(self.deck, self.card_open)
 
 
-# 6. Game
-# -------------------------------------------------------------------------
-
 class Game(object):
     """
     A game reflects an iteration of turns, until one player fulfills the winning condition of 0 hand cards.
@@ -554,9 +531,6 @@ class Game(object):
         if comment == False: enable_print()
 
 
-# 7. Tournament
-# -------------------------------------------------------------------------
-
 def tournament(iterations, algo, comment, agent_info):
     """
     A function that iterates various Games and outputs summary statistics over all executed simulations.
@@ -577,7 +551,7 @@ def tournament(iterations, algo, comment, agent_info):
     winners, turns, coverage = list(), list(), list()
     agent.agent_init(agent_info)
 
-    for i in tqdm(range(iterations)):
+    for i in range(iterations):
         time.sleep(0.01)
 
         if i%2 == 1:
@@ -602,9 +576,6 @@ def tournament(iterations, algo, comment, agent_info):
     
     return winners, turns, coverage
 
-
-# 8. Winning Condition
-# -------------------------------------------------------------------------
 
 def check_win(player):
     if len(player.hand) == 0:

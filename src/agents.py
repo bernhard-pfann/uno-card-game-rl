@@ -1,17 +1,9 @@
-# 1. Libraries
-# -------------------------------------------------------------------------
-
-# Custom libraries
-import state_action_reward as sar
-
-# Public libraries
 import pandas as pd
 import numpy as np
 import random
 
+import src.state_action_reward as sar
 
-# 2. Q-Learning
-# -------------------------------------------------------------------------
 
 class QLearningAgent(object):
     
@@ -29,12 +21,12 @@ class QLearningAgent(object):
         
         self.epsilon     = agent_init_info["epsilon"]
         self.step_size   = agent_init_info["step_size"]
-        self.new_model   = agent_init_info["new_model"]
+        self.pre_trained = agent_init_info["pre_trained"]
         self.R           = sar.rewards(self.states, self.actions)        
 
         
         # (2) Create Q-table that stores action-value estimates, initialized at zero
-        if self.new_model == True:
+        if not self.pre_trained:
             self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
                                   columns = self.actions, 
                                   index   = self.states)
@@ -157,14 +149,14 @@ class MonteCarloAgent(object):
         self.action_seen = list()
         self.q_seen      = list()
        
-        self.epsilon   = agent_init_info["epsilon"]
-        self.step_size = agent_init_info["step_size"]
-        self.new_model = agent_init_info["new_model"]
-        self.R         = sar.rewards(self.states, self.actions)
+        self.epsilon     = agent_init_info["epsilon"]
+        self.step_size   = agent_init_info["step_size"]
+        self.pre_trained = agent_init_info["pre_trained"]
+        self.R           = sar.rewards(self.states, self.actions)
         
         
         # (2) Create Q-table that stores action-value estimates, initialized at zero
-        if self.new_model == True:
+        if self.pre_trained == True:
             self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
                                   columns = self.actions, 
                                   index   = self.states)
