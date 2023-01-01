@@ -555,14 +555,14 @@ def tournament(iterations, algo, comment, agent_info):
         time.sleep(0.01)
 
         if i%2 == 1:
-            game = Game(player_1_name = "Bernhard", 
-                        player_2_name = "Magdalena",
-                        starting_name = "Magdalena",
+            game = Game(player_1_name = "AI", 
+                        player_2_name = "Human",
+                        starting_name = "Human",
                         comment = comment)
         else:
-            game = Game(player_1_name = "Bernhard", 
-                        player_2_name = "Magdalena",
-                        starting_name = "Bernhard",
+            game = Game(player_1_name = "AI", 
+                        player_2_name = "Human",
+                        starting_name = "AI",
                         comment = comment)
 
         winners.append(game.winner)
