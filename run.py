@@ -19,7 +19,7 @@ def main():
         pd.Series(run[1], name='turns')
     ], axis = 1)
     
-    result["win_rate"] = np.where(result["winner"]=="Bernhard",1,0)
+    result["win_rate"] = np.where(result["winner"]==conf.player_name_1,1,0)
     result["win_rate"] = result["win_rate"].cumsum()/(result.index+1)
 
     q_vals = pd.DataFrame(uno.agent.q)

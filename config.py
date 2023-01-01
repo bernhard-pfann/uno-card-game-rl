@@ -7,3 +7,6 @@ params = {
         "step_size": 0.2,
     }
 }
+
+player_name_1 = "AI"
+player_name_2 = "Human"
