@@ -6,11 +6,11 @@ import src.state_action_reward as sar
 
 
 class Agent(object):
-    def __init__(self, agent_init_info:dict):
+    def __init__(self, agent_info:dict):
         """Initializes the agent to get parameters and create an empty q-tables."""
 
-        self.epsilon     = agent_init_info["epsilon"]
-        self.step_size   = agent_init_info["step_size"]
+        self.epsilon     = agent_info["epsilon"]
+        self.step_size   = agent_info["step_size"]
         self.states      = sar.states()
         self.actions     = sar.actions()
         self.R           = sar.rewards(self.states, self.actions)        
@@ -26,9 +26,9 @@ class Agent(object):
 
 class QLearningAgent(Agent):
     
-    def __init__(self, agent_init_info:dict):        
+    def __init__(self, agent_info:dict):        
         
-        super().__init__(agent_init_info)
+        super().__init__(agent_info)
         self.prev_state  = 0
         self.prev_action = 0
     
@@ -106,9 +106,9 @@ class QLearningAgent(Agent):
         
 class MonteCarloAgent(Agent):
 
-    def __init__(self, agent_init_info):
+    def __init__(self, agent_info):
 
-        super().__init__(agent_init_info)
+        super().__init__(agent_info)
         self.state_seen  = list()
         self.action_seen = list()
         self.q_seen      = list()

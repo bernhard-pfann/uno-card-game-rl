@@ -544,13 +544,11 @@ def tournament(iterations, algo, comment, agent_info):
     algorithm = algo
     
     if algo == "q-learning":
-        agent = ag.QLearningAgent()
+        agent = ag.QLearningAgent(agent_info)
     else:
-        agent = ag.MonteCarloAgent()
-    
+        agent = ag.MonteCarloAgent(agent_info)
     
     winners, turns, coverage = list(), list(), list()
-    agent.agent_init(agent_info)
 
     for i in range(iterations):
         time.sleep(0.01)
