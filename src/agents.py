@@ -53,16 +53,6 @@ class Agent(object):
                 if val >= val_max: 
                     val_max = val
                     action = i
-        
-        # (3) Add state-action pair if not seen in this simulation
-        if ((state),action) not in self.q_seen:
-            self.state_seen.append(state)
-            self.action_seen.append(action)
-        
-        self.q_seen.append(((state),action))
-        self.visit.loc[[state], action] += 1
-        
-        return action
 
 
 class QLearningAgent(Agent):
@@ -122,6 +112,19 @@ class MonteCarloAgent(Agent):
         self.action_seen = list()
         self.q_seen      = list()
     
+    def step(self, state_dict:dict, actions_dict:dict):
+        super().step(state_dict, actions_dict)
+        
+        # Add state-action pair if not seen in this simulation
+        if ((state),action) not in self.q_seen:
+            self.state_seen.append(state)
+            self.action_seen.append(action)
+        
+        self.q_seen.append(((state),action))
+        self.visit.loc[[state], action] += 1
+        
+        return action
+
     def update(self, state_dict:dict, action):
         """
         Updating Q-values according to Belman equation
