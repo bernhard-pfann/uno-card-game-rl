@@ -70,8 +70,6 @@ class QLearningAgent(Agent):
             - state_dict as dict
             - action as str
         """
-
-        import pdb; pdb.set_trace()
         state = [i for i in state_dict.values()]
         state = tuple(state)
         
