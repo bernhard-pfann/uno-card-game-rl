@@ -23,6 +23,7 @@ class Agent(object):
         
         self.visit = self.q.copy()
 
+    
 
 class QLearningAgent(Agent):
     
@@ -32,7 +33,7 @@ class QLearningAgent(Agent):
         self.prev_state  = 0
         self.prev_action = 0
     
-    def step(self, state_dict:dict, actions_dict:dict):
+    def step(self, state_dict, actions_dict):
         """
         Choose the optimal next action according to the followed policy.
         Required parameters:
@@ -62,8 +63,10 @@ class QLearningAgent(Agent):
                 if val >= val_max: 
                     val_max = val
                     action = i
-
-    def update(self, state_dict:dict, action):
+        
+        return action
+    
+    def update(self, state_dict, action):
         """
         Updating Q-values according to Belman equation
         Required parameters:
@@ -110,11 +113,10 @@ class MonteCarloAgent(Agent):
         self.action_seen = list()
         self.q_seen      = list()
     
-    def step(self, state_dict:dict, actions_dict:dict):
+    def step(self, state_dict, actions_dict):
         """
         Choose the optimal next action according to the followed policy.
         Required parameters:
-
             - state_dict as dict
             - actions_dict as dict
         """
@@ -141,7 +143,7 @@ class MonteCarloAgent(Agent):
                 if val >= val_max: 
                     val_max = val
                     action = i
-
+        
         # (3) Add state-action pair if not seen in this simulation
         if ((state),action) not in self.q_seen:
             self.state_seen.append(state)
@@ -151,8 +153,9 @@ class MonteCarloAgent(Agent):
         self.visit.loc[[state], action] += 1
         
         return action
-
-    def update(self, state_dict:dict, action):
+    
+    
+    def update(self, state_dict, action):
         """
         Updating Q-values according to Belman equation
         Required parameters:
