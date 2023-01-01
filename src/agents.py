@@ -23,6 +23,15 @@ class Agent(object):
         
         self.visit = self.q.copy()
 
+
+class QLearningAgent(Agent):
+    
+    def __init__(self, agent_info:dict):        
+        
+        super().__init__(agent_info)
+        self.prev_state  = 0
+        self.prev_action = 0
+    
     def step(self, state_dict:dict, actions_dict:dict):
         """
         Choose the optimal next action according to the followed policy.
@@ -54,15 +63,6 @@ class Agent(object):
                     val_max = val
                     action = i
 
-
-class QLearningAgent(Agent):
-    
-    def __init__(self, agent_info:dict):        
-        
-        super().__init__(agent_info)
-        self.prev_state  = 0
-        self.prev_action = 0
-    
     def update(self, state_dict:dict, action):
         """
         Updating Q-values according to Belman equation
@@ -113,9 +113,38 @@ class MonteCarloAgent(Agent):
         self.q_seen      = list()
     
     def step(self, state_dict:dict, actions_dict:dict):
-        super().step(state_dict, actions_dict)
+        """
+        Choose the optimal next action according to the followed policy.
+        Required parameters:
+
+            - state_dict as dict
+            - actions_dict as dict
+        """
         
-        # Add state-action pair if not seen in this simulation
+        # (1) Transform state dictionary into tuple
+        state = [i for i in state_dict.values()]
+        state = tuple(state)
+        
+        # (2) Choose action using epsilon greedy
+        # (2a) Random action
+        if random.random() < self.epsilon:
+            
+            actions_possible = [key for key,val in actions_dict.items() if val != 0]         
+            action = random.choice(actions_possible)
+        
+        # (2b) Greedy action
+        else:
+            actions_possible = [key for key,val in actions_dict.items() if val != 0]
+            random.shuffle(actions_possible)
+            val_max = 0
+            
+            for i in actions_possible:
+                val = self.q.loc[[state],i][0]
+                if val >= val_max: 
+                    val_max = val
+                    action = i
+
+        # (3) Add state-action pair if not seen in this simulation
         if ((state),action) not in self.q_seen:
             self.state_seen.append(state)
             self.action_seen.append(action)
