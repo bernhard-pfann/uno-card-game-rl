@@ -6,6 +6,7 @@ import os
 
 import src.agents as ag
 import src.state_action_reward as sar
+import config as conf
 
 
 def block_print():
@@ -543,26 +544,24 @@ def tournament(iterations, algo, comment, agent_info):
     algorithm = algo
     
     if algo == "q-learning":
-        agent = ag.QLearningAgent()
+        agent = ag.QLearningAgent(agent_info)
     else:
-        agent = ag.MonteCarloAgent()
-    
+        agent = ag.MonteCarloAgent(agent_info)
     
     winners, turns, coverage = list(), list(), list()
-    agent.agent_init(agent_info)
 
     for i in range(iterations):
         time.sleep(0.01)
 
         if i%2 == 1:
-            game = Game(player_1_name = "AI", 
-                        player_2_name = "Human",
-                        starting_name = "Human",
+            game = Game(player_1_name = conf.player_name_1, 
+                        player_2_name = conf.player_name_2,
+                        starting_name = conf.player_name_2,
                         comment = comment)
         else:
-            game = Game(player_1_name = "AI", 
-                        player_2_name = "Human",
-                        starting_name = "AI",
+            game = Game(player_1_name = conf.player_name_1, 
+                        player_2_name = conf.player_name_2,
+                        starting_name = conf.player_name_1,
                         comment = comment)
 
         winners.append(game.winner)

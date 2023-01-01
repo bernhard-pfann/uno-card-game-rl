@@ -5,36 +5,33 @@ import random
 import src.state_action_reward as sar
 
 
-class QLearningAgent(object):
-    
-    def agent_init(self, agent_init_info):
-        """
-        Initializes the agent to get parameters and import/create q-tables.
-        Required parameters: agent_init_info as dict
-        """
-        
-        # (1) Store the parameters provided in agent_init_info
+class Agent(object):
+    def __init__(self, agent_info:dict):
+        """Initializes the agent to get parameters and create an empty q-tables."""
+
+        self.epsilon     = agent_info["epsilon"]
+        self.step_size   = agent_info["step_size"]
         self.states      = sar.states()
         self.actions     = sar.actions()
-        self.prev_state  = 0
-        self.prev_action = 0
-        
-        self.epsilon     = agent_init_info["epsilon"]
-        self.step_size   = agent_init_info["step_size"]
         self.R           = sar.rewards(self.states, self.actions)        
 
-        # (2) Create Q-table that stores action-value estimates, initialized at zero
         self.q = pd.DataFrame(
-            data=np.zeros((
-                len(self.states), 
-                len(self.actions)
-            )), 
-            columns=self.actions, 
-            index=self.states
+            data    = np.zeros((len(self.states), len(self.actions))), 
+            columns = self.actions, 
+            index   = self.states
         )
         
         self.visit = self.q.copy()
+
+    
+
+class QLearningAgent(Agent):
+    
+    def __init__(self, agent_info:dict):        
         
+        super().__init__(agent_info)
+        self.prev_state  = 0
+        self.prev_action = 0
     
     def step(self, state_dict, actions_dict):
         """
@@ -68,7 +65,6 @@ class QLearningAgent(object):
                     action = i
         
         return action
-    
     
     def update(self, state_dict, action):
         """
@@ -108,36 +104,14 @@ class QLearningAgent(object):
         self.prev_action = action
       
         
-class MonteCarloAgent(object):
+class MonteCarloAgent(Agent):
 
-    def agent_init(self, agent_init_info):
-        """
-        Initializes the agent to get parameters and import/create q-tables.
-        Required parameters: agent_init_info as dict
-        """
-        
-        # (1) Store the parameters provided in agent_init_info
-        self.states      = sar.states()
-        self.actions     = sar.actions()
+    def __init__(self, agent_info:dict):
+
+        super().__init__(agent_info)
         self.state_seen  = list()
         self.action_seen = list()
         self.q_seen      = list()
-       
-        self.epsilon     = agent_init_info["epsilon"]
-        self.step_size   = agent_init_info["step_size"]
-        self.R           = sar.rewards(self.states, self.actions)
-        
-        # (2) Create Q-table that stores action-value estimates, initialized at zero
-        self.q = pd.DataFrame(
-            data=np.zeros((
-                len(self.states), 
-                len(self.actions)
-            )), 
-            columns=self.actions, 
-            index=self.states
-        )
-        
-        self.visit = self.q.copy()
     
     def step(self, state_dict, actions_dict):
         """
