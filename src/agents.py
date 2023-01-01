@@ -21,43 +21,20 @@ class QLearningAgent(object):
         
         self.epsilon     = agent_init_info["epsilon"]
         self.step_size   = agent_init_info["step_size"]
-        self.pre_trained = agent_init_info["pre_trained"]
         self.R           = sar.rewards(self.states, self.actions)        
 
-        
         # (2) Create Q-table that stores action-value estimates, initialized at zero
-        if not self.pre_trained:
-            self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
-                                  columns = self.actions, 
-                                  index   = self.states)
-            
-            self.visit = self.q.copy()
+        self.q = pd.DataFrame(
+            data=np.zeros((
+                len(self.states), 
+                len(self.actions)
+            )), 
+            columns=self.actions, 
+            index=self.states
+        )
         
+        self.visit = self.q.copy()
         
-        # (3) Import already existing Q-values and visits table if possible
-        else:
-            try:
-                self.q            = pd.read_csv("../assets/files/q-learning-q.csv", sep = ";", index_col = "Unnamed: 0")
-                self.q.index      = self.q.index.map(lambda x: eval(x))
-                self.q["IDX"]     = self.q.index
-                self.q            = self.q.set_index("IDX", drop = True)
-                self.q.index.name = None
-
-                self.visit            = pd.read_csv("../assets/files/q-learning-visits.csv", sep = ";", index_col = "Unnamed: 0")
-                self.visit.index      = self.visit.index.map(lambda x: eval(x))
-                self.visit["IDX"]     = self.visit.index
-                self.visit            = self.visit.set_index("IDX", drop = True)
-                self.visit.index.name = None
-
-            # (3a) Create empty q-tables if file is not found
-            except:
-                print ("Existing model could not be found. New model is being created.")
-                self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
-                                      columns = self.actions, 
-                                      index   = self.states)
-
-                self.visit = self.q.copy()
-            
     
     def step(self, state_dict, actions_dict):
         """
@@ -129,10 +106,7 @@ class QLearningAgent(object):
         # (2) Save and return action/state
         self.prev_state  = state
         self.prev_action = action
-
-
-# 3. Monte Carlo
-# -------------------------------------------------------------------------       
+      
         
 class MonteCarloAgent(object):
 
@@ -151,42 +125,19 @@ class MonteCarloAgent(object):
        
         self.epsilon     = agent_init_info["epsilon"]
         self.step_size   = agent_init_info["step_size"]
-        self.pre_trained = agent_init_info["pre_trained"]
         self.R           = sar.rewards(self.states, self.actions)
         
-        
         # (2) Create Q-table that stores action-value estimates, initialized at zero
-        if self.pre_trained == True:
-            self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
-                                  columns = self.actions, 
-                                  index   = self.states)
-            
-            self.visit = self.q.copy()
+        self.q = pd.DataFrame(
+            data=np.zeros((
+                len(self.states), 
+                len(self.actions)
+            )), 
+            columns=self.actions, 
+            index=self.states
+        )
         
-        # (3) Import already existing Q-values and visits table if possible
-        else:
-            try:
-                self.q            = pd.read_csv("../assets/files/monte-carlo-q.csv", sep = ";", index_col = "Unnamed: 0")
-                self.q.index      = self.q.index.map(lambda x: eval(x))
-                self.q["IDX"]     = self.q.index
-                self.q            = self.q.set_index("IDX", drop = True)
-                self.q.index.name = None
-
-                self.visit            = pd.read_csv("../assets/files/monte-carlo-visits.csv", sep = ";", index_col = "Unnamed: 0")
-                self.visit.index      = self.visit.index.map(lambda x: eval(x))
-                self.visit["IDX"]     = self.visit.index
-                self.visit            = self.visit.set_index("IDX", drop = True)
-                self.visit.index.name = None
-            
-            # (3a) Create empty q-tables if file is not found
-            except:
-                print ("Existing model could not be found. New model is being created.")
-                self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
-                                      columns = self.actions, 
-                                      index   = self.states)
-
-                self.visit = self.q.copy()
-
+        self.visit = self.q.copy()
     
     def step(self, state_dict, actions_dict):
         """

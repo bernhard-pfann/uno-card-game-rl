@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 
@@ -23,6 +24,9 @@ def main():
 
     q_vals = pd.DataFrame(uno.agent.q)
     q_vals.index.rename("id", inplace=True)
+
+    if not os.path.exists("assets"):
+        os.makedirs("assets")
 
     q_vals.to_csv("assets/q-values.csv", index=True)
     result.to_csv("assets/results.csv", index=False) 
