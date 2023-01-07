@@ -2,12 +2,12 @@ import os
 import pandas as pd
 import numpy as np
 
-import src.environment as uno
+from src.game import tournament
 import config as conf
 
 def main():
 
-    run = uno.tournament(
+    run = tournament(
         iterations = conf.params['iterations'],
         algo       = conf.params['algorithm'],
         comment    = conf.params['logging'],
@@ -22,7 +22,7 @@ def main():
     result["win_rate"] = np.where(result["winner"]==conf.player_name_1,1,0)
     result["win_rate"] = result["win_rate"].cumsum()/(result.index+1)
 
-    q_vals = pd.DataFrame(uno.agent.q)
+    q_vals = pd.DataFrame(run[2].q)
     q_vals.index.rename("id", inplace=True)
 
     if not os.path.exists("assets"):
