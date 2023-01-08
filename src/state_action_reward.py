@@ -50,7 +50,10 @@ def states():
 def actions():
     """TODO: Comment this function"""
 
-    actions_all = ["RED","GRE","BLU","YEL","SKI","REV","PL2","PL4","COL"]    
+    actions_all = [
+        "RED", "GRE", "BLU", "YEL", "SKI", 
+        "REV", "PL2", "PL4", "COL"
+    ]    
     return actions_all
 
 def rewards(states, actions):

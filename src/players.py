@@ -74,7 +74,6 @@ class Player(object):
         for key, val in zip(spec_cards.keys(), spec_cards.values()):
                 self.state[key+"#"] = min([1 if card.value == key else 0 for card in self.hand_play].count(1),val)
     
-    
     def identify_action(self):
         """
         All actions are evaluated if they are available to the player, dependent on his hand and card_open.
@@ -94,8 +93,7 @@ class Player(object):
         # (3) Action properties: wild playable cards
         for key in wild_cards.keys():
             self.actions[key] = min([1 if card.value == key else 0 for card in self.hand_play].count(1),1)
-    
-              
+     
     def play_agent(self, deck, card_open, agent, algorithm):
         """
         Reflecting a players' intelligent move supported by the RL-algorithm, that consists of:
@@ -158,8 +156,7 @@ class Player(object):
         
         # Update Q Value           
         if algorithm == "q-learning":
-            agent.update(self.state, self.action)
-           
+            agent.update(self.state, self.action)      
 
     def play_rand(self, deck):
         """

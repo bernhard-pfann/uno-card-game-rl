@@ -36,7 +36,6 @@ class Deck(object):
         self.build()
         self.shuffle()
     
-    
     def build(self):
         colors = ["RED","GRE","BLU","YEL"]
 

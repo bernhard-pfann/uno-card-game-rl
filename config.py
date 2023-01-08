@@ -1,6 +1,6 @@
 params = {
-    "iterations": 100,
-    "algorithm": "monte-carlo",
+    "iterations": 200,
+    "algorithm": "q-learning", # ["q-learning", "monte-carlo"]
     "logging": False,
     "model": {
         "epsilon": 0.4,

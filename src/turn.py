@@ -119,7 +119,6 @@ class Turn(object):
                         
             if check_win(player_act) == True: return
         
-        
         if self.count%2 == 0:
             print (f'\n{player_act.name} has to draw {self.count*penalty} cards')
             for i in range (self.count*penalty): player_act.draw(self.deck, self.card_open)

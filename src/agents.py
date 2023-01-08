@@ -24,7 +24,6 @@ class Agent(object):
         self.visit = self.q.copy()
 
     
-
 class QLearningAgent(Agent):
     
     def __init__(self, agent_info:dict):        
@@ -153,7 +152,6 @@ class MonteCarloAgent(Agent):
         self.visit.loc[[state], action] += 1
         
         return action
-    
     
     def update(self, state_dict, action):
         """
