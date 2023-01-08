@@ -1,71 +1,36 @@
-# 1. Libraries
-# -------------------------------------------------------------------------
-
-# Custom libraries
-import state_action_reward as sar
-
-# Public libraries
 import pandas as pd
 import numpy as np
 import random
 
+import src.state_action_reward as sar
 
-# 2. Q-Learning
-# -------------------------------------------------------------------------
 
-class QLearningAgent(object):
-    
-    def agent_init(self, agent_init_info):
-        """
-        Initializes the agent to get parameters and import/create q-tables.
-        Required parameters: agent_init_info as dict
-        """
-        
-        # (1) Store the parameters provided in agent_init_info
+class Agent(object):
+    def __init__(self, agent_info:dict):
+        """Initializes the agent to get parameters and create an empty q-tables."""
+
+        self.epsilon     = agent_info["epsilon"]
+        self.step_size   = agent_info["step_size"]
         self.states      = sar.states()
         self.actions     = sar.actions()
-        self.prev_state  = 0
-        self.prev_action = 0
-        
-        self.epsilon     = agent_init_info["epsilon"]
-        self.step_size   = agent_init_info["step_size"]
-        self.new_model   = agent_init_info["new_model"]
         self.R           = sar.rewards(self.states, self.actions)        
 
+        self.q = pd.DataFrame(
+            data    = np.zeros((len(self.states), len(self.actions))), 
+            columns = self.actions, 
+            index   = self.states
+        )
         
-        # (2) Create Q-table that stores action-value estimates, initialized at zero
-        if self.new_model == True:
-            self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
-                                  columns = self.actions, 
-                                  index   = self.states)
-            
-            self.visit = self.q.copy()
+        self.visit = self.q.copy()
+
+    
+class QLearningAgent(Agent):
+    
+    def __init__(self, agent_info:dict):        
         
-        
-        # (3) Import already existing Q-values and visits table if possible
-        else:
-            try:
-                self.q            = pd.read_csv("../assets/files/q-learning-q.csv", sep = ";", index_col = "Unnamed: 0")
-                self.q.index      = self.q.index.map(lambda x: eval(x))
-                self.q["IDX"]     = self.q.index
-                self.q            = self.q.set_index("IDX", drop = True)
-                self.q.index.name = None
-
-                self.visit            = pd.read_csv("../assets/files/q-learning-visits.csv", sep = ";", index_col = "Unnamed: 0")
-                self.visit.index      = self.visit.index.map(lambda x: eval(x))
-                self.visit["IDX"]     = self.visit.index
-                self.visit            = self.visit.set_index("IDX", drop = True)
-                self.visit.index.name = None
-
-            # (3a) Create empty q-tables if file is not found
-            except:
-                print ("Existing model could not be found. New model is being created.")
-                self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
-                                      columns = self.actions, 
-                                      index   = self.states)
-
-                self.visit = self.q.copy()
-            
+        super().__init__(agent_info)
+        self.prev_state  = 0
+        self.prev_action = 0
     
     def step(self, state_dict, actions_dict):
         """
@@ -99,7 +64,6 @@ class QLearningAgent(object):
                     action = i
         
         return action
-    
     
     def update(self, state_dict, action):
         """
@@ -137,64 +101,16 @@ class QLearningAgent(object):
         # (2) Save and return action/state
         self.prev_state  = state
         self.prev_action = action
-
-
-# 3. Monte Carlo
-# -------------------------------------------------------------------------       
+      
         
-class MonteCarloAgent(object):
+class MonteCarloAgent(Agent):
 
-    def agent_init(self, agent_init_info):
-        """
-        Initializes the agent to get parameters and import/create q-tables.
-        Required parameters: agent_init_info as dict
-        """
-        
-        # (1) Store the parameters provided in agent_init_info
-        self.states      = sar.states()
-        self.actions     = sar.actions()
+    def __init__(self, agent_info:dict):
+
+        super().__init__(agent_info)
         self.state_seen  = list()
         self.action_seen = list()
         self.q_seen      = list()
-       
-        self.epsilon   = agent_init_info["epsilon"]
-        self.step_size = agent_init_info["step_size"]
-        self.new_model = agent_init_info["new_model"]
-        self.R         = sar.rewards(self.states, self.actions)
-        
-        
-        # (2) Create Q-table that stores action-value estimates, initialized at zero
-        if self.new_model == True:
-            self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
-                                  columns = self.actions, 
-                                  index   = self.states)
-            
-            self.visit = self.q.copy()
-        
-        # (3) Import already existing Q-values and visits table if possible
-        else:
-            try:
-                self.q            = pd.read_csv("../assets/files/monte-carlo-q.csv", sep = ";", index_col = "Unnamed: 0")
-                self.q.index      = self.q.index.map(lambda x: eval(x))
-                self.q["IDX"]     = self.q.index
-                self.q            = self.q.set_index("IDX", drop = True)
-                self.q.index.name = None
-
-                self.visit            = pd.read_csv("../assets/files/monte-carlo-visits.csv", sep = ";", index_col = "Unnamed: 0")
-                self.visit.index      = self.visit.index.map(lambda x: eval(x))
-                self.visit["IDX"]     = self.visit.index
-                self.visit            = self.visit.set_index("IDX", drop = True)
-                self.visit.index.name = None
-            
-            # (3a) Create empty q-tables if file is not found
-            except:
-                print ("Existing model could not be found. New model is being created.")
-                self.q = pd.DataFrame(data    = np.zeros((len(self.states), len(self.actions))), 
-                                      columns = self.actions, 
-                                      index   = self.states)
-
-                self.visit = self.q.copy()
-
     
     def step(self, state_dict, actions_dict):
         """
@@ -236,7 +152,6 @@ class MonteCarloAgent(object):
         self.visit.loc[[state], action] += 1
         
         return action
-    
     
     def update(self, state_dict, action):
         """
