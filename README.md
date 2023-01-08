@@ -1,6 +1,6 @@
 # Tackling the UNO Card Game with Reinforcement Learning
 
-Author: [Bernhard Pfann](https://bernhard-pfann.notion.site/)<br>
+Author: [Bernhard Pfann](https://www.linkedin.com/in/bernhard-pfann/)<br>
 Status: Work in progress
 
 ## Description
