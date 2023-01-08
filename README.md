@@ -2,7 +2,7 @@
 
 Author: [Bernhard Pfann](https://www.linkedin.com/in/bernhard-pfann/)<br>
 Status: Done<br>
-Article: [https://towardsdatascience.com/tackling-uno-card-game-with-reinforcement-learning-fad2fc19355c]([https://towardsdatascience.com/tackling-uno-card-game-with-reinforcement-learning-fad2fc19355c])
+Article: [https://towardsdatascience.com/tackling-uno-card-game-with-reinforcement-learning](https://towardsdatascience.com/tackling-uno-card-game-with-reinforcement-learning-fad2fc19355c)
 
 ## Description
 In this project I tried to analytically derive an optimal strategy, for the classic UNO card game. To do so, I structured my work as follows:
