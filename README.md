@@ -1,7 +1,7 @@
 # Tackling the UNO Card Game with Reinforcement Learning
 
-Author: [Bernhard Pfann](https://bernhard-pfann.notion.site/)
-Status: Work in Progress
+Author: [Bernhard Pfann](https://bernhard-pfann.notion.site/)<br>
+Status: Work in progress
 
 ## Description
 In this project I tried to analytically derive an optimal strategy, for the classic UNO card game. To do so, I structured my work as follows:
